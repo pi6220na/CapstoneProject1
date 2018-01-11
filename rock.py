@@ -4,6 +4,10 @@
 
 import random
 
+ROCK = 1
+PAPER = 2
+SCISSORS = 3
+
 def main():
     user_choice = get_input()
 
@@ -18,12 +22,24 @@ def main():
         user_choice = get_input()
 
 def get_input():
-    print('Welcome to Rock-Paper-Scissors Game')
-    print('     Select 1) for Rock')
-    print('            2) for Paper')
-    print('            3) for Scissors')
-    print('             Q to quit')
-    user_choice = input('Please make a selection: ')
+    user_choice = ''
+
+    while (user_choice.lower() != 'q' and not user_choice.isdigit()):
+        print('Welcome to Rock-Paper-Scissors Game')
+        print('     Select 1) for Rock')
+        print('            2) for Paper')
+        print('            3) for Scissors')
+        print('             Q to quit')
+        user_choice = input('Please make a selection: ')
+
+        if (user_choice.lower() == 'q'):
+            break
+
+        if (user_choice.isdigit()):
+            if (int(user_choice) < 1 or int(user_choice) > 3):
+                print('Error - must select number between 1 and 3')
+            else:
+                break
 
     return user_choice
 
@@ -33,23 +49,23 @@ def get_computer():
     return pick
 
 def determine_winner(user, pc):
-
+    # 1=rock, 2=paper, 3=scissors
     if user == pc:
         return "tie"
 
-    if (user == 1 and pc == 2):
+    if (user == ROCK and pc == PAPER):
         return 'computer wins - paper wraps rock'
-    elif (user == 1 and pc == 3):
+    elif (user == ROCK and pc == SCISSORS):
         return 'player wins - rock breaks scissors'
 
-    if (user == 2 and pc == 1):
+    if (user == PAPER and pc == ROCK):
         return 'player wins - paper wraps rock'
-    elif (user == 2 and pc == 3):
+    elif (user == PAPER and pc == SCISSORS):
         return 'computer wins - scissors cuts paper'
 
-    if (user == 3 and pc == 1):
+    if (user == SCISSORS and pc == ROCK):
         return 'computer wins - rock breaks scissors'
-    elif (user == 3 and pc == 2):
+    elif (user == SCISSORS and pc == PAPER):
         return 'player wins - scissors cuts paper'
 
 main()
