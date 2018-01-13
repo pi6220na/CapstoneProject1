@@ -4,19 +4,25 @@
 # Jan 10, 2018
 
 import random
+import pprint
 
 ROCK = 1
 PAPER = 2
 SCISSORS = 3
+TESTRUN = 10000
 
 
 # main loop controls the game flow
 def main():
-    try:
+    #try:
 
         player_choice = get_input()
 
         while (player_choice.lower() != 'q'):
+
+            if int(player_choice) == 4:
+                run_auto_game_test()
+                break
 
             computer_pick = get_computer_pick()
             winner = determine_winner(int(player_choice), computer_pick)
@@ -29,9 +35,9 @@ def main():
         print('Thanks for playing')
         print('')
 
-    except Exception as err:
+    #except Exception as err:
 
-        print('An error occurred. Error message: ', err)
+    #    print('An error occurred. Error message: ', err)
 
 
 # prints player choice menu and validates the input
@@ -45,6 +51,7 @@ def get_input():
         print('     Select 1) for Rock')
         print('            2) for Paper')
         print('            3) for Scissors')
+        print('            4) to run automatic game loop')
         print('            Q or q to quit')
         player_choice = input('Please make a selection: ')
 
@@ -52,15 +59,15 @@ def get_input():
             break
 
         if (player_choice.isdigit()):
-            if (int(player_choice) < 1 or int(player_choice) > 3):
+            if (int(player_choice) < 1 or int(player_choice) > 4):
                 print('')
-                print('Error - must select number between 1 and 3')
+                print('Error - must select number between 1 and 4')
                 print('')
             else:
                 break
         else:
             print('')
-            print('Error - enter 1, 2, or 3, q to quit')
+            print('Error - enter 1, 2, 3, or 4, or q to quit')
             print('')
 
     return player_choice
@@ -109,6 +116,68 @@ def display_computer_choice(computer_pick):
         print('Computer chose: Scissors')
 
     print('')
+
+def run_auto_game_test():
+    loopCount = 0
+    # use a dictionary to hold win/loss counts and stats
+    player1 = { 'tie':0 , 'win':0, 'loss':0, 'rock':0, 'paper':0, 'scissors':0 }
+    player2 = { 'tie':0 , 'win':0, 'loss':0, 'rock':0, 'paper':0, 'scissors':0 }
+
+    while loopCount < TESTRUN:
+
+        player1_choice = get_computer_pick()
+        player2_choice = get_computer_pick()
+        winner = determine_winner(player1_choice, player2_choice)
+
+
+        #if 'rock' in winner:
+        #    print('winner has a rock in the string')
+        #if winner[26:34] == 'scissors':
+        #    print('winner has a scissors in the string')
+        #print(winner[16:24])
+        #if 'paper' in winner:
+        #    print('winner has a paper in the string')
+
+
+        if winner[0:4] == 'tie':
+            player1['tie'] += 1
+            player2['tie'] += 1
+
+
+        if winner[0:6] == 'player':
+            #print('winner = player')
+            player1['win'] += 1
+            player2['loss'] += 1
+            if 'rock' in winner:
+                player1['rock'] = player1['rock'] + 1
+            if 'paper' in winner:
+                player1['paper'] = player1['paper'] + 1
+            #if winner[26:34] == 'scissors':
+            if 'scissors' in winner:
+                player1['scissors'] = player1['scissors'] + 1
+                #print('                         added one to scissors')
+
+        if winner[0:8] == 'computer':
+            #print('winner = computer')
+            player2['win'] = player2['win'] + 1
+            player1['loss'] += 1
+            if 'rock' in winner:
+                player2['rock'] = player2['rock'] + 1
+            if 'paper' in winner:
+                player2['paper'] = player2['paper'] + 1
+            if 'scissors' in winner:
+                player2['scissors'] = player2['scissors'] + 1
+
+
+        loopCount += 1
+
+    pp = pprint.PrettyPrinter(indent=4)
+    print('player1 = ')
+    pp.pprint(player1)
+    #print(player1)
+    print('player2 = ')
+    pp.pprint(player2)
+    #print(player2)
 
 
 main()
