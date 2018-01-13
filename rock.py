@@ -14,7 +14,7 @@ TESTRUN = 10000
 
 # main loop controls the game flow
 def main():
-    #try:
+    # try:
 
         player_choice = get_input()
 
@@ -35,7 +35,7 @@ def main():
         print('Thanks for playing')
         print('')
 
-    #except Exception as err:
+    # except Exception as err:
 
     #    print('An error occurred. Error message: ', err)
 
@@ -43,9 +43,7 @@ def main():
 # prints player choice menu and validates the input
 def get_input():
 
-    player_choice = ''
-
-    while ( True ):
+    while True:
 
         print('Welcome to Rock-Paper-Scissors Game')
         print('     Select 1) for Rock')
@@ -117,6 +115,8 @@ def display_computer_choice(computer_pick):
 
     print('')
 
+
+# runs game by looping through game funcions TESTRUN number times
 def run_auto_game_test():
     loopCount = 0
     # use a dictionary to hold win/loss counts and stats
@@ -129,7 +129,6 @@ def run_auto_game_test():
         player2_choice = get_computer_pick()
         winner = determine_winner(player1_choice, player2_choice)
 
-
         #if 'rock' in winner:
         #    print('winner has a rock in the string')
         #if winner[26:34] == 'scissors':
@@ -138,11 +137,9 @@ def run_auto_game_test():
         #if 'paper' in winner:
         #    print('winner has a paper in the string')
 
-
         if winner[0:4] == 'tie':
             player1['tie'] += 1
             player2['tie'] += 1
-
 
         if winner[0:6] == 'player':
             #print('winner = player')
@@ -167,7 +164,6 @@ def run_auto_game_test():
                 player2['paper'] = player2['paper'] + 1
             if 'scissors' in winner:
                 player2['scissors'] = player2['scissors'] + 1
-
 
         loopCount += 1
 
