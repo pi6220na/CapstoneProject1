@@ -25,6 +25,10 @@ def main():
             print('')
             player_choice = get_input()
 
+        print('')
+        print('Thanks for playing')
+        print('')
+
     except Exception as err:
 
         print('An error occurred. Error message: ', err)
@@ -51,12 +55,13 @@ def get_input():
             if (int(player_choice) < 1 or int(player_choice) > 3):
                 print('')
                 print('Error - must select number between 1 and 3')
+                print('')
             else:
                 break
-
-        print('')
-        print('Error - invalid input, try again')
-        print('')
+        else:
+            print('')
+            print('Error - enter 1, 2, or 3, q to quit')
+            print('')
 
     return player_choice
 
