@@ -51,7 +51,7 @@ def get_input():
         print('     Select 1) for Rock')
         print('            2) for Paper')
         print('            3) for Scissors')
-        print('            4) to run automatic game loop')
+        print('            4) to run automatic game computer versus computer')
         print('            Q or q to quit')
         player_choice = input('Please make a selection: ')
 
@@ -172,6 +172,7 @@ def run_auto_game_test():
         loopCount += 1
 
     pp = pprint.PrettyPrinter(indent=4)
+    print('Computer versus computer results, 10000 games played:')
     print('player1 = ')
     pp.pprint(player1)
     #print(player1)
