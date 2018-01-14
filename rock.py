@@ -5,11 +5,12 @@
 
 import random
 import pprint
+import time
 
 ROCK = 1
 PAPER = 2
 SCISSORS = 3
-TESTRUN = 10000
+TESTRUN = 100000
 
 
 # main loop controls the game flow
@@ -121,8 +122,10 @@ def display_computer_choice(computer_pick):
 def run_auto_game_test():
     loopCount = 0
     # use a dictionary to hold win/loss counts and stats
-    player1 = { 'tie':0 , 'win':0, 'loss':0, 'rock':0, 'paper':0, 'scissors':0 }
-    player2 = { 'tie':0 , 'win':0, 'loss':0, 'rock':0, 'paper':0, 'scissors':0 }
+    player1 = { '3-tie':0 , '1-win':0, '2-loss':0, '4-rock':0, '5-paper':0, '6-scissors':0 }
+    player2 = { '3-tie':0 , '1-win':0, '2-loss':0, '4-rock':0, '5-paper':0, '6-scissors':0 }
+
+    start = time.clock()
 
     while loopCount < TESTRUN:
 
@@ -139,39 +142,40 @@ def run_auto_game_test():
         #    print('winner has a paper in the string')
 
         if winner[0:4] == 'tie':
-            player1['tie'] += 1
-            player2['tie'] += 1
+            player1['3-tie'] += 1
+            player2['3-tie'] += 1
 
         if winner[0:6] == 'player':
             #print('winner = player')
-            player1['win'] += 1
-            player2['loss'] += 1
+            player1['1-win'] += 1
+            player2['2-loss'] += 1
             if 'rock' in winner:
-                player1['rock'] = player1['rock'] + 1
+                player1['4-rock'] = player1['4-rock'] + 1
             if 'paper' in winner:
-                player1['paper'] = player1['paper'] + 1
+                player1['5-paper'] = player1['5-paper'] + 1
             #if winner[26:34] == 'scissors':
             if 'scissors' in winner:
-                player1['scissors'] = player1['scissors'] + 1
+                player1['6-scissors'] = player1['6-scissors'] + 1
                 #print('                         added one to scissors')
 
         if winner[0:8] == 'computer':
             #print('winner = computer')
-            player2['win'] = player2['win'] + 1
-            player1['loss'] += 1
+            player2['1-win'] = player2['1-win'] + 1
+            player1['2-loss'] += 1
             if 'rock' in winner:
-                player2['rock'] = player2['rock'] + 1
+                player2['4-rock'] = player2['4-rock'] + 1
             if 'paper' in winner:
-                player2['paper'] = player2['paper'] + 1
+                player2['5-paper'] = player2['5-paper'] + 1
             if 'scissors' in winner:
-                player2['scissors'] = player2['scissors'] + 1
+                player2['6-scissors'] = player2['6-scissors'] + 1
 
         loopCount += 1
 
     pp = pprint.PrettyPrinter(indent=4)
 
     print('')
-    print('Computer versus computer results, 10000 games played:')
+    print('Computer versus computer results, ', TESTRUN, ' games played:')
+    print('run took ', time.clock() - start, ' seconds')
     print('')
     print('player1 = ')
     pp.pprint(player1)
