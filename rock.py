@@ -11,12 +11,10 @@ PAPER = 2
 SCISSORS = 3
 TESTRUN = 10000
 
-#test push
-
 
 # main loop controls the game flow
 def main():
-    # try:
+     try:
 
         player_choice = get_input()
 
@@ -37,9 +35,8 @@ def main():
         print('Thanks for playing')
         print('')
 
-    # except Exception as err:
-
-    #    print('An error occurred. Error message: ', err)
+     except Exception as err:
+        print('An error occurred. Error message: ', err)
 
 
 # prints player choice menu and validates the input
@@ -108,6 +105,8 @@ def determine_winner(player, pc):
 # output the computer's choice in human readable format
 def display_computer_choice(computer_pick):
 
+    print('')
+
     if (computer_pick == ROCK):
         print('Computer chose: Rock')
     if (computer_pick == PAPER):
@@ -170,7 +169,10 @@ def run_auto_game_test():
         loopCount += 1
 
     pp = pprint.PrettyPrinter(indent=4)
+
+    print('')
     print('Computer versus computer results, 10000 games played:')
+    print('')
     print('player1 = ')
     pp.pprint(player1)
     #print(player1)
