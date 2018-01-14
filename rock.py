@@ -11,6 +11,8 @@ PAPER = 2
 SCISSORS = 3
 TESTRUN = 10000
 
+#test push
+
 
 # main loop controls the game flow
 def main():
